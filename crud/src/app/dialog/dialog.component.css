@@ -79,3 +79,6 @@ form {
     transform: translateY(0);
   }
 }
+.blur-on-invalid {
+  opacity: 0.5;
+}
