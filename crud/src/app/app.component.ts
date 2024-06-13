@@ -26,7 +26,8 @@ export class AppComponent {
   }
   openDialog() {
     this.dialog.open(DialogComponent, {
-      width:'30%'
+      width:'60%',
+      height:'60%'
     }).afterClosed().subscribe(val=>{
       if(val==='Save'){
         this.getAllProducts()
@@ -55,9 +56,10 @@ export class AppComponent {
       width:'30%',
       data:row
     }).afterClosed().subscribe(val=>{
-      if(val==='Update'){
-        this.getAllProducts();
-      }
+      // if(val==='Update'){
+      //   this.getAllProducts();
+      // }
+      console.log(val);
     })
   }
   deleteProduct(id:number){

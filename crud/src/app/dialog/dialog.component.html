@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Add Product Form</h1>
+<!-- <h1 mat-dialog-title>Add Product Form</h1>
 <div mat-dialog-content>
   <form [formGroup]="productForm">
     <mat-form-field appearance="outline">
@@ -18,8 +18,63 @@
 <div mat-dialog-action [align]="'end'">
   <button mat-raised-button color="warn" mat-dialog-close>Close</button>
   <button mat-raised-button color="primary" [disabled]="!productForm.valid" (click)="addProduct()">{{actionBtn}}</button>
-</div>
+</div> -->
 <!-- <div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between">
   <button mat-raised-button color="warn" mat-dialog-close>Close</button>
   <button mat-raised-button color="primary"  (click)="addProduct()">{{ actionBtn }}</button>
 </div> -->
+
+<div class="dialog">
+  <div class="header">
+    <span>SHARE PROJECT</span>
+  </div>
+  <hr>
+  <form [formGroup]="shareProjectForm" (ngSubmit)="onSubmit()" class="header">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input id="email" type="email" formControlName="email" class="email">
+    </div>
+    <div class="form-group">
+      <label for="option">Permission</label>
+      <select id="option" formControlName="option" (change)="onSubmit()">
+        <option value="Option 1">Viewer</option>
+        <option value="Option 2">Read only</option>
+        <option value="Option 3">Write Permission</option>
+      </select>
+      <button type="button" class="add-button" (click)="onSubmit()">Add</button>
+    </div>
+  </form>
+  <hr>
+  <div class="title-container">
+    <h3 class="title">User and roles</h3>
+    <div class="title-stripe"></div>
+    <hr>
+  </div>
+  <div class="form-values">
+    <div class="form-valuesHeader">
+      <div class="column">EMAIL</div>
+      <div class="column">Permission</div>
+      <div class="column">action</div>
+    </div>
+    <div class="row" *ngFor="let entry of entries; let i = index">
+      <div class="column" *ngIf="entry.email!=ownerEmail">{{ entry.email }}</div>
+      <div class="column"*ngIf="entry.email!=ownerEmail"> <select [ngModel]="entry.option" (ngModelChange)="updatePermission(i, $event)">
+        <option value="Option 1">Viewer</option>
+        <option value="Option 2">Read only</option>
+        <option value="Option 3">Write Permission</option>
+      </select></div>
+      <div class="column" *ngIf="entry.email!=ownerEmail">
+        <button type="button" (click)="deleteEntry(i)"><mat-icon>delete</mat-icon></button>
+      </div>
+    </div>
+    <div class="row" *ngIf="entries.length > 0 && entries[entries.length - 1].email === ownerEmail">
+      <div class="column">{{ ownerEmail }}</div>
+      <div class="column">
+        <div class="owner-permission">Owner</div>
+      </div>
+      <div class="column"></div>
+    </div>
+  </div>
+</div>
+
+
