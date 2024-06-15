@@ -9,7 +9,8 @@ import {MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog'
 })
 export class DialogComponent implements OnInit {
 
-  
+  bool:Boolean=true;
+  addbool:Boolean=false;
   shareProjectForm!: FormGroup;
   entries: { email: string, option: string }[] = [];
   ownerEmail: string = 'aditibhosale@gmail.com';
@@ -71,6 +72,7 @@ export class DialogComponent implements OnInit {
   onSubmit(): void {
     if (this.shareProjectForm.valid) {
       // Add the new entry before the owner entry
+      this.bool=false;
       this.entries.splice(this.entries.length - 1, 0, this.shareProjectForm.value);
       this.shareProjectForm.reset({ email: '', option: 'Option 1' });
     }
@@ -82,5 +84,13 @@ export class DialogComponent implements OnInit {
 
   deleteEntry(index: number): void {
     this.entries.splice(index, 1);
+  }
+
+  onCancel() {
+    // handle cancel action
+  }
+
+  shareProject() {
+    // handle share project action
   }
 }
